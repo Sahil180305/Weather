@@ -3,6 +3,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import './InfoBox.css';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 export default function ({info}){
     let SNOW_URL="https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -17,12 +21,17 @@ export default function ({info}){
                 <CardMedia
                     sx={{ height: 200 }}
                     title={info.Weather}
-                    image={info.Weather.toUpperCase()=="RAIN" ?RAIN_URL:info.Weather.toUpperCase()=="SNOW"?SNOW_URL:info.Weather.toUpperCase()=="CLOUDS"?OVERCAST_URL:info.Temp<15?SNOW_URL:info.Temp<25?SUMMER_URL:HOT_URL}
+                    image={info.Weather.toUpperCase()=="RAIN" ?RAIN_URL:info.Weather.toUpperCase()=="CLOUDS"?OVERCAST_URL:info.Temp<15?SNOW_URL:info.Temp<25?SUMMER_URL:HOT_URL}
 
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                       {info.Name}
+                    { info.Weather.toUpperCase()=="RAIN" ?<BeachAccessIcon/>:info.Weather.toUpperCase()=="CLOUDS"?<ThunderstormIcon/>:info.Temp<15?<AcUnitIcon/>:<Brightness7Icon/>}
+                    &nbsp;
+                    {info.Name}
+                    &nbsp;
+                    { info.Weather.toUpperCase()=="RAIN" ?<BeachAccessIcon/>:info.Weather.toUpperCase()=="CLOUDS"?<ThunderstormIcon/>:info.Temp<15?<AcUnitIcon/>:<Brightness7Icon/>}
+
                     </Typography>
                     <Typography variant="body2" color="text.secondary" component="span">
                         <p> Temprature = {info.Temp}&deg;C</p>
