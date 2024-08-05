@@ -7,6 +7,7 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Box from '@mui/material/Box';
 
 export default function ({info}){
     let SNOW_URL="https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -15,16 +16,18 @@ export default function ({info}){
     let OVERCAST_URL="https://plus.unsplash.com/premium_photo-1661963915894-32923efe0dcd?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     let HOT_URL="https://images.unsplash.com/photo-1447601932606-2b63e2e64331?q=80&w=2779&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
+
     return(
         <div className="cardContainer">
-            <Card sx={{ maxWidth: 345 }} className='card'>
+            <Card sx={{ maxWidth: 600,display: 'flex' }} className='card'>
                 <CardMedia
-                    sx={{ height: 200 }}
+                    sx={{ height: 350,width: 400 }}
                     title={info.Weather}
                     image={info.Weather.toUpperCase()=="RAIN" ?RAIN_URL:info.Weather.toUpperCase()=="CLOUDS"?OVERCAST_URL:info.Temp<15?SNOW_URL:info.Temp<25?SUMMER_URL:HOT_URL}
-
+                    component="img"
                 />
-                <CardContent>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography gutterBottom variant="h5" component="div">
                     { info.Weather.toUpperCase()=="RAIN" ?<BeachAccessIcon/>:info.Weather.toUpperCase()=="CLOUDS"?<ThunderstormIcon/>:info.Temp<15?<AcUnitIcon/>:<Brightness7Icon/>}
                     &nbsp;
@@ -41,6 +44,7 @@ export default function ({info}){
                         <p>The weather can be described as <i>{info.Description}</i> and feels like {info.feelsLike}&deg;C </p>
                     </Typography>
                 </CardContent>
+                </Box>  
             </Card>
         </div>
     )
